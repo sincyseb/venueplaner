@@ -65,4 +65,5 @@ Route::get('/gallery',[usercontroller::class,'gallery']);
 Route::get('/getvenue/{id}',[usercontroller::class,'getvenue']);
 Route::post('/getvenueprice/{id}',[usercontroller::class,'getvenueprice']);
 Route::get('/bookingdetails',[usercontroller::class,'bookingdetails']);
+Route::get('/contacts',[usercontroller::class,'contacts']);
 

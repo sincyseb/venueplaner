@@ -69,12 +69,12 @@
           <nav>
             <ul class="sf-menu">
              <li class="current"><a href="/">Home</a></li>
-             <li><a href="/userreg">Register</a></li>
-             <li><a href="/userlogin">Login</a></li>
              <li><a href="/about">About</a></li>
              <li><a href="/services">Services</a></li>
              <li><a href="/gallery">Gallery</a></li>
-             <li><a href="contacts.html">Contacts</a></li>
+             <li><a href="/userreg">Register</a></li>
+             <li><a href="/userlogin">Login</a></li>
+             <li><a href="/contacts">Contacts</a></li>
            </ul>
           </nav>
           <div class="clear"></div>
@@ -91,9 +91,10 @@
   <div class="container">
     <div class="row">
       <div class="grid_12"> 
-        <div class="copyright"><a href="#" class="f_logo"><img src="user/images/f_logo.png" alt=""></a> &copy; <span id="copyright-year"></span> | <a href="#">Privacy Policy</a>
+        <div class="copyright"><a href="#" class="f_logo"><img src="user/images/f_logo.png" alt=""></a> &copy; <span id="copyright-year"></span> 
+         <div class="copyright">copyright@eventrum
           <div class="sub_copyright">
-            Website designed by <a href="http://www.templatemonster.com/" rel="nofollow">TemplateMonster.com</a>
+          </div>
           </div>
         </div>
       </div>

@@ -9,6 +9,7 @@ use App\Models\service;
 use App\Models\event;
 use App\Models\venue;
 use App\Models\userbook;
+use App\Models\gallery;
 
 class usercontroller extends Controller
 {
@@ -48,8 +49,8 @@ class usercontroller extends Controller
     }
     public function gallery()
     {
-        // $data['result']=service::get();
-        return view('user.gallery');
+        $data['result']=gallery::get();
+        return view('user.gallery',$data);
     }
     public function bookingdetails()
     {
@@ -57,6 +58,10 @@ class usercontroller extends Controller
         $data['result']=userbook::join('venues','venues.id','=','userbooks.venue')->join('services','services.id','=','userbooks.service')->where('userbooks.name',$id)->get();
    
         return view('user.bookingdetails',$data);
+    }
+    public function contacts()
+    {
+        return view('user.contacts');
     }
 
 //view userbook

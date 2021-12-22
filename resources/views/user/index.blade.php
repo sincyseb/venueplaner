@@ -32,8 +32,8 @@
       <div class="grid_10 preffix_1">
         <div class="block1">
           <div class="block1_title">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In mollis erat mattis neque facilisis, sit amet ultricies erat rutrumas facilisis, nulla vel viverra 
-            <span>Auctor, leo magna sodales felis, quis malesuada nibh odio ut velit</span>
+          We value integrity, creativity, originality and excellence in service and design from concept to reality. Press play below and watch as Eventrum Designs transforms St. Regis Bal Harbour Resort in Miami into Kara & Robin’s dream wedding celebration.
+
           </div>
           <a href="#" class="btn">View Portfolio</a>
         </div>
@@ -73,9 +73,9 @@
           <h3>Welcome</h3>
           <img src="user/images/page1_img7.jpg" alt="" class="img_inner fleft">
           <div class="extra_wrapper">
-            <p class="text1">Follow the link to find information about this <a href="http://blog.templatemonster.com/free-website-templates/" class="color1"  rel="nofollow">freebie</a>. </p>
-            <p class="text1 offset__1">Want more <a href="http://www.templatemonster.com/category/event-planner-wordpress-themes/" rel="nofollow" class="color1">goodies</a> of this kind? Visit TemplateMonster.com</p>
-            Curabitur vel lorem sit amet nulla ullamcorper fermentum. In vitae varius augue, eu consectetur ligula. Etiam dui eros, laoreet site amet est vel, commodo venenatis eros. Fusce adipiscing quam id risus sagittis, non consequat lacus interdum. Proin ut tinciduntl nulla, eu sodales arcu. Quisque viverra nulla nunc, eu ultrices libero ultricies eget. Phasellus accumsan justo vitae feugiat  placer. Praesent vel ultrices velit. Suspendisse risus justo, lacinia vitae eleifend sed, cursus sit amet massa. <br> <a href="#" class="link1">More</a>
+            <p class="text1">Our collaborative process to create a stunning event requires four steps. The first step will be to meet. It’s our job now to listen. We want to discover and respect your visions, stories and dreams for your custom event.</p>
+            <p class="text1">Next, we will take all you have shared with us and draft custom concepts for you to review. This includes hand-drawn floor plans with innovative layers to develop into exciting ideas. As each client is unique, so are our designs.</p>
+            <p class="text1">During this stage we will transition from concept to composition. We will work together to refine our ideas into concrete layouts. An actual tablescape will be prepared and presented to you for approval and we will decide on all the final details and touches.</p>
           </div>
         </div>
       </div>
@@ -121,7 +121,7 @@
         </div>
       </div>
       <div class="grid_4">
-        <h4>Testimonials</h4>
+        <h4>Review</h4>
         <blockquote class="bq1">
           <img src="user/images/page1_img12.jpg" alt="">
           <div class="extra_wrapper">
