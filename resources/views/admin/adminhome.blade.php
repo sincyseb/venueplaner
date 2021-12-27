@@ -1,4 +1,3 @@
-
 @extends('admin.header')
 @section('admin')
     <main class="mdl-layout__content">

@@ -18,7 +18,8 @@
       </div>
       <div class="grid_6">
         <h4>Contact Form</h4>
-        <form id="contact-form" class="contact-form" style="padding:20px">
+        <form id="contact-form" class="contact-form" action="/contacting" method="post"  style="padding:20px">
+        @csrf
           <div class="contact-form-loader"></div>
           <fieldset>
             <label class="name">
@@ -43,8 +44,9 @@
               <span class="error-message">*The message is too short.</span> -->
             </label>
             <div>
-              <a href="#" class="btn" data-type="reset">Clear</a>
-              <a href="#" class="btn" data-type="submit">Send</a>
+              
+              <input type="submit" class="btn" value="send"  name="submit" id="submit">
+              <input type="reset" class="btn"  value="clear" name="clear" id="clear">
             </div>
           </fieldset> 
           <div class="modal fade response-message">

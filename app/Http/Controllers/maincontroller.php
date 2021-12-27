@@ -9,6 +9,9 @@ use App\Models\service;
 use App\Models\gallery;
 use App\Models\event;
 use App\Models\venue;
+use App\Models\userbook;
+use App\Models\userdetail;
+use App\Models\contact;
 
 class maincontroller extends Controller
 {
@@ -20,11 +23,14 @@ class maincontroller extends Controller
         $this->obj3=new gallery;
         $this->obj4=new event;
         $this->obj5=new venue;
+        $this->obj6=new userbook;
+        $this->obj7=new contact;
     }
   
     //view
     public function adminhome()
     {
+        $data['result']=contact::get();
         return view('admin.adminhome');
     }
     public function adminlogin()
@@ -221,6 +227,12 @@ class maincontroller extends Controller
         return view('admin.updatevenue',$data);
     }
 
+    public function viewbooking()
+    {
+        $data['result']=userbook::get();
+        return view('admin.viewbooking',$data);
+    }
+
 
 
 
@@ -337,6 +349,54 @@ class maincontroller extends Controller
         $this->obj5->updatevenue('venues',$data,$id);
         return redirect('/viewvenue');
     }
+
+
+    //approve and delened
+    public function approve($id)
+    {
+        $data=['status'=>"Approved"];
+        $this->obj6->approvebook('userbooks',$data,$id);
+        return redirect('/viewbooking');
+    }
+    public function decline($id)
+    {
+        $data=['status'=>"Declined"];
+        $this->obj6->approvebook('userbooks',$data,$id);
+        return redirect('/viewbooking');
+    }
+    
+        //bill generate
+    public function generatebill($id)
+    {
+        $data['result']=userdetail::join('userbooks','userdetails.id','=','userbooks.user_id')
+        ->join('venues','venues.id','=','userbooks.venue')->where('b_id',$id)->get();
+        return view('admin.generatebill',$data);
+    }
+
+    public function venuejoin($id)
+    {
+        $data['result']=venue::join('userbooks','venue.id','=','userbooks.venue')->get();
+        return view('admin.generatebill',$data);
+    }
+    
+    
+
+    
+
+
+    //contact
+    public function contactadmin()
+    {
+        $data['result']=contact::get();
+        return view('admin.contactadmin',$data);
+    }
+
+    // public function adminr()
+    // {
+    //     $data['result']=$this->obj7->selectcontact('contacts');
+    //     return view('admin.adminreply');
+    // }
+    
     
 
 }

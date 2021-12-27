@@ -30,6 +30,9 @@ Route::get('/viewservice',[maincontroller::class,'viewservice']);
 Route::get('/viewgallery',[maincontroller::class,'viewgallery']);
 Route::get('/viewevent',[maincontroller::class,'viewevent']);
 Route::get('/viewvenue',[maincontroller::class,'viewvenue']);
+Route::get('/contactadmin',[maincontroller::class,'contactadmin']);
+Route::get('/viewbooking',[maincontroller::class,'viewbooking']);
+Route::get('/generatebill/{id}',[maincontroller::class,'generatebill']);
 //insert into table
 Route::post('/adabout',[maincontroller::class,'adabout']);
 Route::post('/adservice',[maincontroller::class,'adservice']);
@@ -46,6 +49,10 @@ Route::get('/updateevent/{id}',[maincontroller::class,'viewupdateevent']);
 Route::post('/eventupdate/{id}',[maincontroller::class,'eventupdate']);
 Route::get('/updatevenue/{id}',[maincontroller::class,'viewupdatevenue']);
 Route::post('/venueupdate/{id}',[maincontroller::class,'venueupdate']);
+Route::get('/venuejoin/{id}',[maincontroller::class,'venuejoin']);
+//approve and decline
+Route::get('/approve/{id}',[maincontroller::class,'approve']);
+Route::get('/decline/{id}',[maincontroller::class,'decline']);
 
 
 
@@ -66,4 +73,7 @@ Route::get('/getvenue/{id}',[usercontroller::class,'getvenue']);
 Route::post('/getvenueprice/{id}',[usercontroller::class,'getvenueprice']);
 Route::get('/bookingdetails',[usercontroller::class,'bookingdetails']);
 Route::get('/contacts',[usercontroller::class,'contacts']);
+Route::post('/contacting',[usercontroller::class,'contacting']);
+Route::get('/getvenueAmt/{id}',[usercontroller::class,'getvenueAmt']);
+Route::get('/updateServ/{id}',[usercontroller::class,'updateServ']);
 

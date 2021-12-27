@@ -339,6 +339,14 @@
                             </div>
                         </div>
                         
+                        <a class="mdl-navigation__link" href="/contactadmin">
+                            <i class="material-icons" role="presentation">map</i>
+                            Questions
+                        </a>
+                        <a class="mdl-navigation__link" href="/viewbooking">
+                            <i class="material-icons" role="presentation">map</i>
+                            View User Booking
+                        </a>
                         <a class="mdl-navigation__link" href="forms.html">
                             <i class="material-icons" role="presentation">person</i>
                             Account

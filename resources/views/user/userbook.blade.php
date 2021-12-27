@@ -110,7 +110,7 @@
                         <option value="{{$value->name}}">{{$value->name}}</option>
                         @endforeach
             </select>
-                    
+                  
                     <!-- <input type="email" name="event" class="form-control"> -->
               </div>
               <div class="form-group">
@@ -141,18 +141,21 @@
               <div class="form-group">
               <label> Venue:</label>
               <select name="venue" id="venue"  class="form-control ">
-                  
+              <option value="default" selected="selected"  disabled="disabled">Select Venue</option>
+
             </select>
-                    
-                    <!-- <input type="email" name="event" class="form-control"> -->
+           <input type="hidden" name="v_price" id="v_price">
               </div>
+              <!-- ------------------------------------------------------------------------ -->
+              <!-- ----------------To get Venue  using ajax---------------------------------- -->
+              <!-- ------------------------------------------------------------- --------------->
               <script type="text/javascript">
-            $(document).ready(function(){
-                $('#place').on('change',function()
-                {
+                $(document).ready(function(){
+                  $('#place').on('change',function()
+                    {
                       var x=$('#place').val();
                       // alert(x)
-                    $.ajax({
+                      $.ajax({
                         type:"get",
                         url:"/getvenue/"+x,
                         data:{
@@ -164,50 +167,42 @@
                           $('#venue').html(result); 
                           // $('#v_price').val(price);  
                         }
+                      });
                     });
-                });
-            });
-        </script>
-              <!-- <div class="form-group">
-              <label> Venue Price:</label>  
-              <select type="text" id="v_price"  name="vprice"   class="form-control ">
-                    <option value="default" selected="selected" id="venue" disabled="disabled">Venue price</option>
-               
-            </select>
-                     
-                <input type="text" id="v_price"  name="vprice" class="form-control">
-              </div> -->
-
-              <!-- <script type="text/javascript">
-            $(document).ready(function(){
-                $('#venue').on('change',function()
-                {
-                      var x=$('#venue').val();
-                      // alert(x)
-                    $.ajax({
+                    $('#venue').on('change',function()
+                    {
+                      var z=$('#venue').val();
+                      $.ajax({
                         type:"get",
-                        url:"/getvenueprice/"+x,
-                        success:function(data)
+                        url:"/getvenueAmt/"+z,
+                        
+                        success:function(price)
                         {
-                          alert(data)
-                          $('.vprice').val(data);  
+                          // alert(price)
+                          // $('#venue').html(result); 
+                          $('#v_price').val(price);  
                         }
+                      });
                     });
-                });
-            });
-        </script> -->
-             
-              
-              <div class="form-group">
+                  });
+              </script> 
+               <!------------------------------------------------------------------------  -->
+              <!-- <div class="form-group">
               <div class="form-check-inline">
                   <label class="form-check-label" for="check1">Service:
                         @foreach($res as $value1)
-                        <input type="checkbox" id="service" name="service[]" value="{{$value1->id}}">{{$value1->name}}
+                        <div>
+                        <input type="checkbox" id="service" class="service" name="service" value="{{$value1->id}}">{{$value1->name}}
+                       
+                  </div>
                         @endforeach
                   </label>
-            </div>        
-              </div>
-             
+               
+            </div>  
+         
+           
+              </div> -->
+            
               <div class="form-group">
                     <label> Date:</label>
                     <td><input type="date" name="date" class="form-control"></td>
@@ -216,37 +211,8 @@
                     <label> Time:</label>
                     <td><input type="time" name="time" class="form-control"></td>
               </div>
-              <!-- <div class="form-group">
-                    <label> Totel Price:</label>
-                    <td><input type="text" name="price" id="price" class="form-control"></td>
-              </div> -->
-              <!-- <script type="text/javascript">
-                $(doucument).ready(function(){
-                  $('.service').on('change',function(){
-                     var row=$(this).closest('div');
-                     var service=parseInt(row.find(this).val());
-                     var price=parseInt(row.find("#price")).val();
-                     var id = parseInt(row.find("#id").val()); 
-                      var totel=parseInt(service)*parseInt(price);
-
-                      row.find('#totel').val(totel);
-                      $.ajax({
-                          type:"post",
-                          url:"/getprice",
-                          data:{
-                          service:service,
-                          totel:totel,
-                          id:id
-                      },
-                      success:function(result)
-                      {
-                          // alert(result)
-                          // $('#totel').html(result);
-                      }
-                      }) 
-                  });
-                });
-              </script> -->
+              
+              
               <div class="form-group">
                     
                     <input type="submit" name="submit" value="Proceed" class="btn btn- #ff66d9">

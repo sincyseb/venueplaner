@@ -10,6 +10,8 @@ use App\Models\event;
 use App\Models\venue;
 use App\Models\userbook;
 use App\Models\gallery;
+use App\Models\contact;
+use Mail;
 
 class usercontroller extends Controller
 {
@@ -17,6 +19,8 @@ class usercontroller extends Controller
     public function __construct()
     {
         $this->obj=new userdetail;
+        $this->obj1=new userbook;
+        $this->obj2=new contact;
     }
   
     public function index()
@@ -52,13 +56,13 @@ class usercontroller extends Controller
         $data['result']=gallery::get();
         return view('user.gallery',$data);
     }
-    public function bookingdetails()
-    {
-        $id=session('sess');
-        $data['result']=userbook::join('venues','venues.id','=','userbooks.venue')->join('services','services.id','=','userbooks.service')->where('userbooks.name',$id)->get();
+    // public function bookingdetails()
+    // // {
+    // //     $id=session('sess');
+    // //     $data['result']=userbook::join('venues','venues.id','=','userbooks.venue')->join('services','services.id','=','userbooks.service')->where('userbooks.name',$id)->get();
    
-        return view('user.bookingdetails',$data);
-    }
+    // //     return view('user.bookingdetails',$data);
+    // // }
     public function contacts()
     {
         return view('user.contacts');
@@ -89,7 +93,14 @@ class usercontroller extends Controller
        
     }
 //using ajax add price
-  
+public function bookingdetails()
+{
+    $id=session('sess');
+    $data['result']=userbook::join('venues','venues.id','=','userbooks.venue')->where('userbooks.user_id',$id)->get();
+
+    $data1['srs']=service::all();
+    return view('user.bookingdetails',$data,$data1);
+}
 
 
 
@@ -110,6 +121,14 @@ class usercontroller extends Controller
             'place'=>$place,
             'city'=>$city];
             $this->obj->insertuser('userdetails',$data);
+            $val=['name'=>$name,
+                'massege'=>'Welcome to Event Management'];
+                $user['to']=$email;
+            Mail::send('email',$val,function($msg) use($user){
+                $msg->to($user['to']);
+                $msg->subject('Welcome Message');
+
+            });
         return view('user.userlogin',$data);
     }
 
@@ -120,17 +139,19 @@ class usercontroller extends Controller
         $place=$reqst->input('place');
         $venue=$reqst->input('venue');
         $service=$reqst->input('service');
-        $servic=implode(',',$service);
+        // $servic=implode(',',$service);
         $date=$reqst->input('date');
         $time=$reqst->input('time');
-        $data=['name'=>$name,
+        $total=$reqst->input('v_price');
+        $data=['user_id'=>$name,
         'event'=>$event,
             'place'=>$place,
             'venue'=>$venue,
-            'service'=>$servic,
+            // 'service'=>$servic,
             'date'=>$date,
             'time'=>$time,
-        'status'=>'waiting'];
+        'status'=>'waiting',
+        'total'=>$total];
             $this->obj->insertuser('userbooks',$data);
         return redirect('/bookingdetails');
     }
@@ -152,6 +173,50 @@ class usercontroller extends Controller
             return redirect('/userlogin')->with('error','invalid username or password!!');
         }
     }
+
+    //get price of service
+    public function getvenueAmt($id)
+    {
+        $data=venue::where('id',$id)->get();
+        foreach($data as $val)
+        {
+            echo $val->price;
+        }
+    }
+
+
+    public function updateServ(Request $req,$id)
+    {
+        $sid=$req->input('serv');
+        // $servic='service'+$sid;
+        $tot=$req->input('tot');
+        $players = userbook::where('b_id',$id)->get();
+        foreach($players as $val)
+        {
+            $x= $val->service;
+        }
+        $data=['service' => $x.','.$sid,
+            'total'=>$tot];
+            $this->obj1->updateData('userbooks',$data,$id);
+
+    }
+
+    //insert into contact
+    public function contacting(request $req)
+    {
+        $name=$req->input('name');
+        $email=$req->input('email');
+        $phone=$req->input('phone');
+        $message=$req->input('message');
+        $data=['name'=>$name,
+        'email'=>$email,
+            'phone'=>$phone,
+            'message'=>$message,
+            'status'=>'waiting'];
+            $this->obj2-> insertcontact('contacts',$data);
+        return redirect('/contacts');
+    }
+
 
     
 }

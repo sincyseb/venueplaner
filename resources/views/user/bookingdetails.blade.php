@@ -22,34 +22,91 @@
               <td style="font-size:20px">date</td>
               <td style="font-size:20px">time</td>
               <td style="font-size:20px">status</td>
-              <td style="font-size:20px">button</td>
+              <td style="font-size:20px">Total</td>
             </tr>
             @foreach($result as $value)
             <tr>
-              <td>{{$value->id}}</td>
+              <td>{{$value->b_id}} <input type="hidden" name="id" id="bid" value="{{$value->b_id}}"></td>
               <td>{{$value->event}}</td>
               <td>{{$value->place}}</td>
-              <td>{{$value->venuetype}},{{$value->price}}</td>
-              <td>
-              @php
-    $values = explode(",",$value->service);
-@endphp
-                <input type="checkbox" name="chk" id="chk" value="1" <?php if(in_array("1", $values)){ echo " checked=\"checked\""; } ?>>Light and sound Service<br>
-                <input type="checkbox" name="chk" id="chk" value="2" <?php if(in_array("2", $values)){ echo " checked=\"checked\""; } ?>>Stage decoration
-              {{$value->s_price}}
+              <td>{{$value->venuetype}}
+             
+             @if($value->service=="")
+             <td>
+              @foreach($srs as $serv)
+              <div id="ckbx">
+                <input type="checkbox" name="chk" id="chk" class="chk" value="{{$serv->id}}">{{$serv->name}}<br>
+                <input type="text" value="{{$serv->s_price}}" name="s_price" id="s_price">
+                @endforeach
+              </div>
               </td>
-              <td> <?php if(in_array("2", $values))
-              { ?>
-                {{$value->s_price}}
-             <?php  } ?></td>
+              @else
+              <td>
+                @php 
+                $values=explode(',',$value->service)
+                @endphp
+              @foreach($srs as $serv)
+              
+                @if(in_array("$serv->id", $values))
+                {{$serv->name}}<br>
+                @endif
+                @endforeach
+             
+              </td>
+           @endif
               <td>{{$value->date}}</td>
               <td>{{$value->time}}</td>
               <td>{{$value->status}}</td>
               <td><a href="/update/{{$value->id}}">Book</a></td>
+              <td>
+              <input type="text" name="e_price" id="e_price"value="{{$value->total}}"> 
+            </td>
             </tr>
             @endforeach
           </table>
+           <script>
+            $(document).ready(function(){
+
+              $('.chk').click(function(){
+              var row = $(this).closest('tr');
+              var chk = $(this).closest('div');
+              var e_price = parseInt(row.find("#e_price").val()); 
+                var s_price = parseInt(chk.find("#s_price").val());
+                var id = parseInt(row.find("#bid").val()); 
+                var sid = parseInt(chk.find("#chk").val()); 
+
+                // alert(sid)
+                    // }
+                    
+             
+              var tot= parseInt(e_price)+parseInt(s_price);
+              //  var c=row.find('#coin').val()
+              // alert(tot)
+              // var total =  parseInt(qty)*parseInt(price);
+              row.find('#e_price').val(tot);
+              // row.find('#tot1').val(tot);
+             
+            $.ajax({
+                    url: "/updateServ/"+id,
+                    method: 'get',
+                    cache: false,
+                    data: {
+                      serv:sid,
+                      tot:tot
+                    },
+                 
+                    success: function(response) {
+                        alert(response)
+                        // console.log(response);
+                    }
+                });
+               
+            });
            
+
+          
+          });
+           </script>
         
           </div>
         </div> 
