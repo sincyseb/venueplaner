@@ -17,12 +17,14 @@
               <td style="font-size:20px">event</td>
               <td style="font-size:20px">place</td>
               <td style="font-size:20px">venue</td>
-              <td style="font-size:20px">sevice</td>
-              <td></td>
+              <td style="font-size:20px">service</td>
+              <!-- <td></td> -->
               <td style="font-size:20px">date</td>
               <td style="font-size:20px">time</td>
               <td style="font-size:20px">status</td>
+              <td></td>
               <td style="font-size:20px">Total</td>
+              <td style="font-size:20px">Recipt</td>
             </tr>
             @foreach($result as $value)
             <tr>
@@ -61,6 +63,7 @@
               <td>
               <input type="text" name="e_price" id="e_price"value="{{$value->total}}"> 
             </td>
+            <td><a href="/viewrecipt/{{$value->b_id}}">Recipt</a></td>
             </tr>
             @endforeach
           </table>

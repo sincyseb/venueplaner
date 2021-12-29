@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 21, 2021 at 07:48 AM
+-- Generation Time: Dec 29, 2021 at 03:37 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -116,6 +116,20 @@ CREATE TABLE `galleries` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `galleries`
+--
+
+INSERT INTO `galleries` (`id`, `name`, `gallery`, `created_at`, `updated_at`) VALUES
+(1, 'Baby Shower', '1640150043.jpg', NULL, NULL),
+(2, 'marraige', '1640150124.jpg', NULL, NULL),
+(3, 'decorations', '1640150194.jpg', NULL, NULL),
+(4, 'decorations', '1640150226.jpg', NULL, NULL),
+(5, 'decorations', '1640150300.jpg', NULL, NULL),
+(6, 'decorations', '1640150356.jpg', NULL, NULL),
+(7, 'pre wedding', 'big8.jpg', NULL, NULL),
+(8, 'b-day', '1640154638.jpg', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -145,8 +159,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (19, '2021_12_10_061707_create_events_table', 4),
 (21, '2021_12_12_145133_create_venues_table', 5),
 (23, '2021_12_17_071559_create_userbooks_table', 6),
-(25, '2021_12_20_070337_add', 7),
-(26, '2021_12_20_070658_add_col_to_services', 8);
+(26, '2021_12_20_070658_add_col_to_services', 8),
+(29, '2021_12_22_080420_rename_col_name_in_userbooks', 10),
+(30, '2021_12_23_055410_rename_col_in_userbooks', 10),
+(31, '2021_12_23_094717_add_col_tot_to_userbooks', 10);
 
 -- --------------------------------------------------------
 
@@ -199,9 +215,9 @@ CREATE TABLE `services` (
 --
 
 INSERT INTO `services` (`id`, `name`, `description`, `s_price`, `image`, `created_at`, `updated_at`) VALUES
-(1, 'Light and sound Service', 'lights can help to change the mood- if your show or event is aiming to evoke an emotional response from the audience, the lighting can really help to achieve this. Lighting and colour can help to create a mood, or an atmosphere in the room.', 'Rs.15,000', 'event1.jpeg', NULL, NULL),
-(2, 'Stage decoration', 'Decoration can be life-enhancing. It can make dinner parties more fun, kids happier, relaxing easier, talks more intimate, guests at ease. And to think, decorating is often considered frivolous.', 'Rs.30,000', 'decoration.jpeg', NULL, NULL),
-(3, 'photography', 'Photography is the art, application, and practice of creating durable images by recording light, either electronically by means of an image sensor, or chemically by means of a light-sensitive material such as photographic film.', 'Rs.18,000', 'page3_img9.jpg', NULL, NULL);
+(1, 'Light and sound Service', 'lights can help to change the mood- if your show or event is aiming to evoke an emotional response from the audience, the lighting can really help to achieve this. Lighting and colour can help to create a mood, or an atmosphere in the room.', '15000', 'event1.jpeg', NULL, NULL),
+(2, 'Stage decoration', 'Decoration can be life-enhancing. It can make dinner parties more fun, kids happier, relaxing easier, talks more intimate, guests at ease. And to think, decorating is often considered frivolous.', '30000', 'decoration.jpeg', NULL, NULL),
+(3, 'photography', 'Photography is the art, application, and practice of creating durable images by recording light, either electronically by means of an image sensor, or chemically by means of a light-sensitive material such as photographic film.', '18000', 'page3_img9.jpg', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -210,28 +226,28 @@ INSERT INTO `services` (`id`, `name`, `description`, `s_price`, `image`, `create
 --
 
 CREATE TABLE `userbooks` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `b_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `event` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `place` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `venue` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `service` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `service` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `time` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `total` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `userbooks`
 --
 
-INSERT INTO `userbooks` (`id`, `name`, `event`, `place`, `venue`, `service`, `date`, `time`, `status`, `created_at`, `updated_at`) VALUES
-(1, '1', 'marraige', 'Ernakulam', '1', '1,2', '2021-12-30', '23:00', 'waiting', NULL, NULL),
-(2, '1', 'marraige', 'Ernakulam', '1', '1,2', '2022-01-07', '11:00', 'waiting', NULL, NULL),
-(3, '1', 'marraige', 'Ernakulam', '1', '1', '2021-12-29', '20:26', 'waiting', NULL, NULL),
-(4, '1', 'marraige', 'Ernakulam', '3', '1,2', '2022-01-19', '10:48', 'waiting', NULL, NULL);
+INSERT INTO `userbooks` (`b_id`, `user_id`, `event`, `place`, `venue`, `service`, `date`, `time`, `status`, `created_at`, `updated_at`, `total`) VALUES
+(5, '1', 'birthday', 'Ernakulam', '2', ',1,2', '2021-12-30', '10:24', 'Approved', NULL, NULL, '62000'),
+(6, '2', 'birthday', 'Ernakulam', '3', ',1,2,3', '2022-01-07', '16:00', 'Approved', NULL, NULL, '84000'),
+(7, '1', 'marraige', 'Ernakulam', '1', ',1,2', '2021-12-31', '11:55', 'Approved', NULL, NULL, '60000');
 
 -- --------------------------------------------------------
 
@@ -257,7 +273,10 @@ CREATE TABLE `userdetails` (
 
 INSERT INTO `userdetails` (`id`, `name`, `email`, `password`, `contact`, `place`, `city`, `created_at`, `updated_at`) VALUES
 (1, 'azna', 'azna@gmail.com', '1234', '12345678', 'asdfg', 'cddf', NULL, NULL),
-(2, 'akhila', 'akhila@gmail.com', '1234', '2345432', 'sdfghj', 'njhbgv', NULL, NULL);
+(2, 'akhila', 'akhila@gmail.com', '1234', '2345432', 'sdfghj', 'njhbgv', NULL, NULL),
+(4, 'Reenu', 'reenu.e@irohub.com', 'reenu1234', '12345678', 'aaaa', 'ssssss', NULL, NULL),
+(5, 'ann', 'ann.e@irohub.com', '1234', '12345678', 'aaa', 'aaaaasss', NULL, NULL),
+(6, 'anna', 'anna.e@irohub.com', '1234456', '12345678', 'adsasd', 'wsrdwe', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -298,11 +317,11 @@ CREATE TABLE `venues` (
 --
 
 INSERT INTO `venues` (`id`, `district`, `location`, `venuetype`, `price`, `image`, `created_at`, `updated_at`) VALUES
-(1, 'Ernakulam', 'kochi', 'abc auditorium', 'Rs.15,000', 'event4.jpeg', NULL, NULL),
-(2, 'Ernakulam', 'kochi', 'A J Hall', 'Rs.17,000', 'light.jpeg', NULL, NULL),
-(3, 'Ernakulam', 'kochi', 'Rena Event Hub', 'Rs.21,000', 'event1.jpeg', NULL, NULL),
-(4, 'Thrissur', 'Thriprayar', 'Celebrations Auditorium', 'Rs.25,000', 'light1.jpeg', NULL, NULL),
-(5, 'Thrissur', 'Thriprayar', 'Century Plaza Auditorium', 'Rs.17,000', 'event4.jpeg', NULL, NULL);
+(1, 'Ernakulam', 'kochi', 'abc auditorium', '15000', 'event4.jpeg', NULL, NULL),
+(2, 'Ernakulam', 'kochi', 'A J Hall', '17000', 'light.jpeg', NULL, NULL),
+(3, 'Ernakulam', 'kochi', 'Rena Event Hub', '21000', 'event1.jpeg', NULL, NULL),
+(4, 'Thrissur', 'Thriprayar', 'Celebrations Auditorium', '25000', 'light1.jpeg', NULL, NULL),
+(5, 'Thrissur', 'Thriprayar', 'Century Plaza Auditorium', '17000', 'event4.jpeg', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -370,7 +389,7 @@ ALTER TABLE `services`
 -- Indexes for table `userbooks`
 --
 ALTER TABLE `userbooks`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`b_id`);
 
 --
 -- Indexes for table `userdetails`
@@ -423,13 +442,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `galleries`
 --
 ALTER TABLE `galleries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -447,13 +466,13 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `userbooks`
 --
 ALTER TABLE `userbooks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `b_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `userdetails`
 --
 ALTER TABLE `userdetails`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `users`

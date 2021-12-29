@@ -30,15 +30,15 @@ Route::get('/viewservice',[maincontroller::class,'viewservice']);
 Route::get('/viewgallery',[maincontroller::class,'viewgallery']);
 Route::get('/viewevent',[maincontroller::class,'viewevent']);
 Route::get('/viewvenue',[maincontroller::class,'viewvenue']);
-Route::get('/contactadmin',[maincontroller::class,'contactadmin']);
 Route::get('/viewbooking',[maincontroller::class,'viewbooking']);
-Route::get('/generatebill/{id}',[maincontroller::class,'generatebill']);
+Route::get('/viewfeedback',[maincontroller::class,'viewfeedback']);
 //insert into table
 Route::post('/adabout',[maincontroller::class,'adabout']);
 Route::post('/adservice',[maincontroller::class,'adservice']);
 Route::post('/adgallery',[maincontroller::class,'adgallery']);
 Route::post('/adevent',[maincontroller::class,'adevent']);
 Route::post('/advenue',[maincontroller::class,'advenue']);
+Route::post('/bill/{b_id}',[maincontroller::class,'bill']);
 //update table details
 Route::post('/updateabout',[maincontroller::class,'updateabout']);
 Route::get('/updateservice/{id}',[maincontroller::class,'viewupdateservice']);
@@ -49,10 +49,10 @@ Route::get('/updateevent/{id}',[maincontroller::class,'viewupdateevent']);
 Route::post('/eventupdate/{id}',[maincontroller::class,'eventupdate']);
 Route::get('/updatevenue/{id}',[maincontroller::class,'viewupdatevenue']);
 Route::post('/venueupdate/{id}',[maincontroller::class,'venueupdate']);
-Route::get('/venuejoin/{id}',[maincontroller::class,'venuejoin']);
 //approve and decline
 Route::get('/approve/{id}',[maincontroller::class,'approve']);
 Route::get('/decline/{id}',[maincontroller::class,'decline']);
+Route::get('/logout',[maincontroller::class,'logout']);
 
 
 
@@ -76,4 +76,7 @@ Route::get('/contacts',[usercontroller::class,'contacts']);
 Route::post('/contacting',[usercontroller::class,'contacting']);
 Route::get('/getvenueAmt/{id}',[usercontroller::class,'getvenueAmt']);
 Route::get('/updateServ/{id}',[usercontroller::class,'updateServ']);
-
+Route::get('/viewrecipt/{id}',[usercontroller::class,'viewbill']);
+Route::get('/addfeedback',[usercontroller::class,'addfeedback']);
+Route::post('/feedback',[usercontroller::class,'feedback']);
+Route::get('/logout',[usercontroller::class,'ulogout']);

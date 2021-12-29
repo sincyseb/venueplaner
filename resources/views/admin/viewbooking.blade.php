@@ -40,7 +40,7 @@
                                 <td class="mdl-data-table__cell--non-numeric">{{$value->total}}</td>
                                 <td class="mdl-data-table__cell--non-numeric"><span class="label label--mini color--light blue"><a href="/approve/{{$value->b_id}}">Approve</a></span></td>
                                 <td class="mdl-data-table__cell--non-numeric"><span class="label label--mini color--light blue"><a href="/decline/{{$value->b_id}}">Decline</a></span></td>
-                                <td class="mdl-data-table__cell--non-numeric"><span class="label label--mini color--light blue"><a href="/generatebill/{{$value->b_id}}">Bill</a></span></td>
+                                <!-- <td class="mdl-data-table__cell--non-numeric"><span class="label label--mini color--light blue"><a href="/generatebill/{{$value->b_id}}">Bill</a></span></td> -->
                             </tr>
                             @endforeach
                             </tbody>

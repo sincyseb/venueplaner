@@ -19,10 +19,16 @@
               <div class="form-group">
                     <label> Email:</label>
                     <input type="email" name="email" class="form-control">
+                    @error("email")
+                    <p style="color:red">{{$errors->first("email")}}
+                    @enderror
               </div>
               <div class="form-group">
                     <label> Password:</label>
                     <td><input type="password" name="password" class="form-control"></td>
+                    @error("password")
+                    <p style="color:red">{{$errors->first("password")}}
+                    @enderror
               </div>
               <div class="form-group">
                     

@@ -11,7 +11,8 @@ use App\Models\event;
 use App\Models\venue;
 use App\Models\userbook;
 use App\Models\userdetail;
-use App\Models\contact;
+
+
 
 class maincontroller extends Controller
 {
@@ -24,13 +25,12 @@ class maincontroller extends Controller
         $this->obj4=new event;
         $this->obj5=new venue;
         $this->obj6=new userbook;
-        $this->obj7=new contact;
+       
     }
   
     //view
     public function adminhome()
     {
-        $data['result']=contact::get();
         return view('admin.adminhome');
     }
     public function adminlogin()
@@ -65,6 +65,8 @@ class maincontroller extends Controller
     //LOGIN
     public function alogin(request $req)
     {
+        // request()->validate(['email'=>'required|email',
+        // 'password'=>'required',]);
         $email=$req->input('email');
         $password=$req->input('password');
         $data=$this->obj->selectadmin('admins',$email,$password);
@@ -77,6 +79,12 @@ class maincontroller extends Controller
         {
             return redirect('/adminlogin')->with('error','invalid username or password!!');
         }
+    }
+    //logout
+    public function logout(request $req)
+    {
+        $req->session()->forget('asess');
+        return redirect('/adminlogin');
     }
 
 
@@ -233,6 +241,12 @@ class maincontroller extends Controller
         return view('admin.viewbooking',$data);
     }
 
+    public function viewfeedback()
+    {
+        $data['result']=$this->obj7->selectfeedback('feedback');
+        return view('admin.viewfeedback',$data);
+    }
+
 
 
 
@@ -366,38 +380,25 @@ class maincontroller extends Controller
     }
     
         //bill generate
-    public function generatebill($id)
-    {
-        $data['result']=userdetail::join('userbooks','userdetails.id','=','userbooks.user_id')
-        ->join('venues','venues.id','=','userbooks.venue')->where('b_id',$id)->get();
-        return view('admin.generatebill',$data);
-    }
-
-    public function venuejoin($id)
-    {
-        $data['result']=venue::join('userbooks','venue.id','=','userbooks.venue')->get();
-        return view('admin.generatebill',$data);
-    }
-    
-    
-
-    
-
-
-    //contact
-    public function contactadmin()
-    {
-        $data['result']=contact::get();
-        return view('admin.contactadmin',$data);
-    }
-
-    // public function adminr()
+    // public function generatebill($id)
     // {
-    //     $data['result']=$this->obj7->selectcontact('contacts');
-    //     return view('admin.adminreply');
+    //     $data['result']=userdetail::join('userbooks','userdetails.id','=','userbooks.user_id')
+    //     ->join('venues','venues.id','=','userbooks.venue')->where('b_id',$id)->get();
+    //     $data1['srs']=service::all();
+    //     return view('admin.generatebill',$data,$data1);
+    // }
+    // public function approvef($id)
+    // {
+    //     $data=['status'=>"Approved"];
+    //     $this->obj7->approvefeed('feedback',$data,$id);
+    //     return redirect('/viewfeedback');
+    // }
+    // public function declinef($id)
+    // {
+    //     $data=['status'=>"Declined"];
+    //     $this->obj7->approvefeed('feedback',$data,$id);
+    //     return redirect('/viewfeedback');
     // }
     
-    
-
 }
 

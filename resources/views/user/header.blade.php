@@ -75,7 +75,7 @@
              <li><a href="/gallery">Gallery</a></li>
              <li><a href="/userreg">Register</a></li>
              <li><a href="/userlogin">Login</a></li>
-             <li><a href="/contacts">Contacts</a></li>
+             <!-- <li><a href="/contacts">Contacts</a></li> -->
            </ul>
           </nav>
           <div class="clear"></div>

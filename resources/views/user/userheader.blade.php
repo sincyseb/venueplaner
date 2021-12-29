@@ -74,10 +74,12 @@
              <li class="current"><a href="/userhome">Home</a></li>
              <li><a href="/userbook">Book</a></li>
              <li><a href="/bookingdetails">View Booking Details</a></li>
-              <li><a href="/userlogout">Logout</a></li>
+             <!-- <li><a href="/viewbill">View Recipt</a></li> -->
+             <!-- <li><a href="/addfeedback">Add Feedback</a></li> -->
+              <li><a href="/logout">Logout</a></li>
              
-             <!-- <li><a href="services.html">Services</a></li> -->
-             <!-- <li><a href="gallery.html">Gallery</a></li> -->
+           
+            
              <!-- <li><a href="contacts.html">Contacts</a></li> --> 
            </ul>
           </nav>

@@ -10,7 +10,6 @@ use App\Models\event;
 use App\Models\venue;
 use App\Models\userbook;
 use App\Models\gallery;
-use App\Models\contact;
 use Mail;
 
 class usercontroller extends Controller
@@ -20,11 +19,11 @@ class usercontroller extends Controller
     {
         $this->obj=new userdetail;
         $this->obj1=new userbook;
-        $this->obj2=new contact;
     }
   
     public function index()
     {
+        // $data['result']=feedback::get();
         return view('user.index');
     }
     public function userlogin()
@@ -63,10 +62,7 @@ class usercontroller extends Controller
    
     // //     return view('user.bookingdetails',$data);
     // // }
-    public function contacts()
-    {
-        return view('user.contacts');
-    }
+   
 
 //view userbook
     public function userbook()
@@ -84,9 +80,11 @@ class usercontroller extends Controller
     public function getvenue(request $req,$id)
     {
         // $name=$req->input('district');
-        $data=venue::where('district',$id)->get();
-        foreach ($data as  $value2) {
+        $data=venue::where('district',$id)->get();?>
+        <option value="default" selected="selected"  disabled="disabled">Select Venue</option>
+     <?php   foreach ($data as  $value2) {
         ?>
+        
         <option value="<?php echo $value2->id;?>"><?php echo $value2->venuetype;?></option>
        
         <?php }
@@ -108,6 +106,12 @@ public function bookingdetails()
     // insert into tables
     public function reg(request $reqst)
     {
+        request()->validate(['name'=>'required|min:3',
+        'email'=>'required|email:unique',
+        'password'=>'required|min:3|max:8',
+        'contact'=>'required',
+        'place'=>'required',
+        'city'=>'required']);
         $name=$reqst->input('name');
         $email=$reqst->input('email');
         $password=$reqst->input('password');
@@ -127,7 +131,7 @@ public function bookingdetails()
             Mail::send('email',$val,function($msg) use($user){
                 $msg->to($user['to']);
                 $msg->subject('Welcome Message');
-
+               
             });
         return view('user.userlogin',$data);
     }
@@ -143,6 +147,8 @@ public function bookingdetails()
         $date=$reqst->input('date');
         $time=$reqst->input('time');
         $total=$reqst->input('v_price');
+        // echo $total;
+        // exit();
         $data=['user_id'=>$name,
         'event'=>$event,
             'place'=>$place,
@@ -152,7 +158,7 @@ public function bookingdetails()
             'time'=>$time,
         'status'=>'waiting',
         'total'=>$total];
-            $this->obj->insertuser('userbooks',$data);
+            $this->obj1->insertuser('userbooks',$data);
         return redirect('/bookingdetails');
     }
 
@@ -160,6 +166,8 @@ public function bookingdetails()
     //login
     public function login(request $req)
     {
+        request()->validate(['email'=>'required|email',
+        'password'=>'required',]);
         $email=$req->input('email');
         $password=$req->input('password');
         $data=$this->obj->selectuser('userdetails',$email,$password);
@@ -172,6 +180,12 @@ public function bookingdetails()
         {
             return redirect('/userlogin')->with('error','invalid username or password!!');
         }
+    }
+    //logout
+    public function ulogout(request $req)
+    {
+        $req->session()->forget('sess');
+        return redirect('/userlogin');
     }
 
     //get price of service
@@ -201,22 +215,20 @@ public function bookingdetails()
 
     }
 
-    //insert into contact
-    public function contacting(request $req)
-    {
-        $name=$req->input('name');
-        $email=$req->input('email');
-        $phone=$req->input('phone');
-        $message=$req->input('message');
-        $data=['name'=>$name,
-        'email'=>$email,
-            'phone'=>$phone,
-            'message'=>$message,
-            'status'=>'waiting'];
-            $this->obj2-> insertcontact('contacts',$data);
-        return redirect('/contacts');
-    }
+   //viewbill
+public function viewbill($id)
+{
+    $uid=session('sess');
+        $data['result']=userdetail::join('userbooks','userdetails.id','=','userbooks.user_id')
+        ->join('venues','venues.id','=','userbooks.venue')->where('userbooks.b_id',$id)
+        ->where('userbooks.user_id',$uid)->get();
+        $data1['srs']=service::all();
+        // return view('admin.generatebill',$data,$data1);
+    
+    return view('user.viewbill',$data,$data1);
 
+}
 
+   
     
 }

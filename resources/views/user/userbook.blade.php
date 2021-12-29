@@ -73,6 +73,7 @@
              <li class="current"><a href="/userhome">Home</a></li>
              <li><a href="/userbook">Book</a></li>
              <li><a href="/bookingdetails">View Booking Details</a></li>
+             <!-- <li><a href="/addfeedback">Addfeedback</a></li> -->
               <li><a href="/userlogout">Logout</a></li>
              
              <!-- <li><a href="services.html">Services</a></li> -->
